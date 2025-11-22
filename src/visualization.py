@@ -37,20 +37,16 @@ def plot_univariate_distribution(data, col_name, is_numerical=True):
 def plot_correlation_heatmap(X, feature_names=None, title="Ma trận Tương quan Features"):
     """
     Tính toán và trực quan hóa ma trận tương quan (Correlation Heatmap) 
-    CHỈ DÙNG NUMPY để tính toán Correlation Matrix.
     """
-    # X là ma trận features 2D (ví dụ: X_train_final)
     
-    # 1. Tính toán Ma trận Tương quan (CHỈ DÙNG NUMPY)
-    # np.corrcoef(X, rowvar=False) tính toán hệ số tương quan Pearson 
-    # giữa các cột (features).
+    # Tính toán Ma trận Tương quan 
     try:
         corr_matrix = np.corrcoef(X, rowvar=False)
     except Exception as e:
         print(f"LỖI: Không thể tính np.corrcoef. Đảm bảo X chỉ chứa giá trị số. Chi tiết: {e}")
         return
 
-    # 2. Trực quan hóa Heatmap
+    # Trực quan hóa Heatmap
     plt.figure(figsize=(10, 8))
     
     # Tạo mask để che phần tam giác trên (tùy chọn)
@@ -125,7 +121,7 @@ def plot_raw_vs_standardized(raw_data, processed_data, raw_name, std_name):
     plt.tight_layout(rect=[0, 0.03, 1, 0.95])
     plt.show()
 
-# --- 2. Trực quan hóa Mô hình ---
+# --- Trực quan hóa Mô hình ---
 
 def plot_loss_history(loss_history, title="Lịch sử Loss trong quá trình Huấn luyện"):
     """
@@ -162,15 +158,13 @@ def plot_correlation_heatmap(X, feature_names=None, title="Ma trận Tương qua
     """
     Tính toán và trực quan hóa ma trận tương quan (Correlation Heatmap).
     """
-    # 1. Tính toán Ma trận Tương quan (Pearson) CHỈ DÙNG NUMPY
-    # rowvar=False: Mỗi cột là một biến (feature), mỗi hàng là một mẫu (sample)
     try:
         corr_matrix = np.corrcoef(X, rowvar=False)
     except Exception as e:
         print(f"LỖI: Không thể tính toán ma trận tương quan. Chi tiết: {e}")
         return
 
-    # 2. Vẽ Heatmap bằng Seaborn
+    # Vẽ Heatmap bằng Seaborn
     plt.figure(figsize=(10, 8))
     
     # Tạo mask để che phần tam giác trên (để biểu đồ đỡ rối)
@@ -199,11 +193,6 @@ def plot_correlation_heatmap(X, feature_names=None, title="Ma trận Tương qua
 def plot_raw_vs_capping(data_raw, data_capped, col_name):
     """
     Vẽ biểu đồ Histogram so sánh phân bố dữ liệu trước và sau khi Capping.
-    
-    Args:
-        data_raw (array-like): Dữ liệu gốc (có thể chứa outliers).
-        data_capped (array-like): Dữ liệu sau khi đã xử lý Capping.
-        col_name (str): Tên cột để hiển thị.
     """
     fig, axes = plt.subplots(1, 2, figsize=(15, 6))
     fig.suptitle(f'HIỆU QUẢ CAPPING (WINSORIZING): {col_name}', fontsize=14, fontweight='bold')
